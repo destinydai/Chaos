@@ -1,0 +1,9 @@
+bin
+*.o
+*.obj
+*.a
+*.lib
+ipch
+*.sdf
+*.dll
+*.so

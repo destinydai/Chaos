@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChoCommon", "ChoCommon\ChoCommon.vcxproj", "{CA341CB4-092D-4DB0-A828-F522B3A8055F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChaosTest", "ChaosTest\ChaosTest.vcxproj", "{AFFBC19B-4986-45E8-92CA-3417B20BCFD0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B946CA89-C098-4D3C-8064-D6292752B0E9} = {B946CA89-C098-4D3C-8064-D6292752B0E9}
+		{CA341CB4-092D-4DB0-A828-F522B3A8055F} = {CA341CB4-092D-4DB0-A828-F522B3A8055F}
+		{BF5643DF-2552-45B7-A7F4-9641A093A4FA} = {BF5643DF-2552-45B7-A7F4-9641A093A4FA}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChoPlatform", "ChoPlatform\ChoPlatform.vcxproj", "{B946CA89-C098-4D3C-8064-D6292752B0E9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChoRender", "ChoRender\ChoRender.vcxproj", "{BF5643DF-2552-45B7-A7F4-9641A093A4FA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChoGeometry", "ChoGeometry\ChoGeometry.vcxproj", "{EBAFDA4D-609C-4D65-B165-803E8B0CBA49}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChoGraphics", "ChoGraphics\ChoGraphics.vcxproj", "{0615CBD8-4247-450F-8223-323A1B99C3E7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChoDatabase", "ChoDatabase\ChoDatabase.vcxproj", "{1FF30D0B-6F5B-417D-B464-E69A11DC2B48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA341CB4-092D-4DB0-A828-F522B3A8055F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CA341CB4-092D-4DB0-A828-F522B3A8055F}.Debug|Win32.Build.0 = Debug|Win32
+		{CA341CB4-092D-4DB0-A828-F522B3A8055F}.Release|Win32.ActiveCfg = Release|Win32
+		{CA341CB4-092D-4DB0-A828-F522B3A8055F}.Release|Win32.Build.0 = Release|Win32
+		{AFFBC19B-4986-45E8-92CA-3417B20BCFD0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AFFBC19B-4986-45E8-92CA-3417B20BCFD0}.Debug|Win32.Build.0 = Debug|Win32
+		{AFFBC19B-4986-45E8-92CA-3417B20BCFD0}.Release|Win32.ActiveCfg = Release|Win32
+		{AFFBC19B-4986-45E8-92CA-3417B20BCFD0}.Release|Win32.Build.0 = Release|Win32
+		{B946CA89-C098-4D3C-8064-D6292752B0E9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B946CA89-C098-4D3C-8064-D6292752B0E9}.Debug|Win32.Build.0 = Debug|Win32
+		{B946CA89-C098-4D3C-8064-D6292752B0E9}.Release|Win32.ActiveCfg = Release|Win32
+		{B946CA89-C098-4D3C-8064-D6292752B0E9}.Release|Win32.Build.0 = Release|Win32
+		{BF5643DF-2552-45B7-A7F4-9641A093A4FA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{BF5643DF-2552-45B7-A7F4-9641A093A4FA}.Debug|Win32.Build.0 = Debug|Win32
+		{BF5643DF-2552-45B7-A7F4-9641A093A4FA}.Release|Win32.ActiveCfg = Release|Win32
+		{BF5643DF-2552-45B7-A7F4-9641A093A4FA}.Release|Win32.Build.0 = Release|Win32
+		{EBAFDA4D-609C-4D65-B165-803E8B0CBA49}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EBAFDA4D-609C-4D65-B165-803E8B0CBA49}.Debug|Win32.Build.0 = Debug|Win32
+		{EBAFDA4D-609C-4D65-B165-803E8B0CBA49}.Release|Win32.ActiveCfg = Release|Win32
+		{EBAFDA4D-609C-4D65-B165-803E8B0CBA49}.Release|Win32.Build.0 = Release|Win32
+		{0615CBD8-4247-450F-8223-323A1B99C3E7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0615CBD8-4247-450F-8223-323A1B99C3E7}.Debug|Win32.Build.0 = Debug|Win32
+		{0615CBD8-4247-450F-8223-323A1B99C3E7}.Release|Win32.ActiveCfg = Release|Win32
+		{0615CBD8-4247-450F-8223-323A1B99C3E7}.Release|Win32.Build.0 = Release|Win32
+		{1FF30D0B-6F5B-417D-B464-E69A11DC2B48}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1FF30D0B-6F5B-417D-B464-E69A11DC2B48}.Debug|Win32.Build.0 = Debug|Win32
+		{1FF30D0B-6F5B-417D-B464-E69A11DC2B48}.Release|Win32.ActiveCfg = Release|Win32
+		{1FF30D0B-6F5B-417D-B464-E69A11DC2B48}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

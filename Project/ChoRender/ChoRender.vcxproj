@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BF5643DF-2552-45B7-A7F4-9641A093A4FA}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ChoRender</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>../../lib\</OutDir>
+    <TargetName>$(ProjectName)d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>../../lib\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;CH_RENDER_GL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>../../Include;./;../../Dependency/glm940;../../Dependency/win32/Include/OGLES;../../Source;../../Dependency/win32/Include/</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <Lib>
+      <AdditionalDependencies>FreeImage.lib</AdditionalDependencies>
+    </Lib>
+    <Lib>
+      <AdditionalLibraryDirectories>../../Dependency/win32/lib</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Include\ChoRender.h" />
+    <ClInclude Include="..\..\Include\Render\IRenderDevice.h" />
+    <ClInclude Include="..\..\Source\Render\DX\HLSLSyntax.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLEGL_Android.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLEGL_Win32.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GlesSyntax.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLES_Shader\GLDirectionalLightShader_p.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLES_Shader\GLDirectionalLightShader_v.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLInputLayout.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLPixelShader.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLRenderBuffer.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLRenderDevice.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLShader.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLShaderProgram.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLShaderVariable.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLShaderVertexAttribute.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLTexture2D.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLVertexShader.h" />
+    <ClInclude Include="..\..\Source\Render\RenderDecl.h" />
+    <ClInclude Include="..\..\Source\Render\RenderDevice.h" />
+    <ClInclude Include="stdafx.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Render\GL\GLEGL_Android.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLEGL_Win32.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLInputLayout.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLPixelShader.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLRenderBuffer.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLRenderDevice.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLShader.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLShaderProgram.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLShaderVariable.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLShaderVertexAttribute.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLTexture2D.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLVertexShader.cpp" />
+    <ClCompile Include="..\..\Source\Render\RenderDevice.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
