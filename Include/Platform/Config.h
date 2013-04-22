@@ -67,6 +67,7 @@ using std::swap;
 #include <android/configuration.h>
 #include <android/looper.h>
 #include <android/native_activity.h>
+#include <android/sensor.h>
 #include <semaphore.h>
 #include <Platform/android/Helper.h>
 #elif CH_PLATFORM == CH_PLATFORM_MACOS

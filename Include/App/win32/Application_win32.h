@@ -1,35 +1,22 @@
 #pragma once
 
 
-
 NS_CH_BEG
 
-class Application
+class Application_win32 : public Application
 {
 public:
-	typedef void (*pfn_OnIdle)(void *pUserParm);
-protected:
-	Application(void);
-	virtual ~Application(void);
-public:
-	static bool Create(const wchar *szWinTitle,uint nWidth,uint nHeight);
-	static void Destroy(void);
-	static Application *GetInstancePtr() { return m_pInstance; } 
-
-	void SetOnIdleProc(pfn_OnIdle onIdle,void *pUserParm);
-
-	IRenderDevice *GetRenderDevice() { return m_pRenderDevice; }
-
-	void Close();
-public:
-	void Run(void);
+	Application_win32(void);
+	virtual ~Application_win32(void);
 
 private:
-	IRenderDevice *m_pRenderDevice;
-	static Application *m_pInstance;
+	inline Win32Window* GetWin32Window() { return (Win32Window*)m_pWindows; }
 
-	//win32 specific 
-	Win32Window *m_pWindows;
+public:
+	virtual void SetOnIdleProc(pfn_OnIdle onIdle,void *pUserParm);
+	virtual bool Create(uint nWidth,uint nHeight);
+	virtual void Close();
+	virtual void Run(void);
 };
 
 

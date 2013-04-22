@@ -1,77 +1,59 @@
+#include "stdafx.h"
+#include "App/win32/Application_win32.h"
 
 NS_CH_BEG
 
-Application::Application( void ):
-	m_pWindows(nullptr),
-	m_pRenderDevice(nullptr)
+Application_win32::Application_win32( void )
 {
 	
 }
 
-Application::~Application( void )
+Application_win32::~Application_win32( void )
 {
-	CH_SFDEL(m_pWindows);
-
-	if(m_pRenderDevice)
-	{
-		m_pRenderDevice->Release();
-		m_pRenderDevice=nullptr;
-	}
-
-	
+	Win32Window* pWnd = (Win32Window*)m_pWindows;
+	CH_SFDEL(pWnd);
+	m_pWindows = nullptr;
 }
 
-bool Application::Create( const wchar *szWinTitle,uint nWidth,uint nHeight )
+bool Application_win32::Create(uint nWidth,uint nHeight )
 {
-	if(nullptr == m_pInstance)
-	{
-		m_pInstance = new Application();
-	}
-
-	GetInstancePtr()->m_pWindows = new Win32Window();
-	if(!GetInstancePtr()->m_pWindows->Create(szWinTitle,nWidth,nHeight))
+	m_pWindows = new Win32Window();
+	if(!GetWin32Window()->Create(L"Chaos3D",nWidth,nHeight))
 	{
 		CH_TRACE("[pl] error: create window failed.");
 		return false;
 	}
 
-		GetInstancePtr()->m_pRenderDevice = CreateRenderDevice(GetInstancePtr()->m_pWindows->GetWind(),RenderDriverType::OPENGL,true);
-	if(GetInstancePtr()->GetRenderDevice() == nullptr)
+	m_pRenderDevice = CreateRenderDevice(GetWin32Window()->GetWind(),RenderDriverType::OPENGL,true);
+	if(m_pRenderDevice== nullptr)
 		return false;
 
 	return true;
 }
 
-void Application::Run( void )
+void Application_win32::Run( void )
 {
 	if(m_pWindows==nullptr)
 		return;
 
-	m_pWindows->Run();
+	GetWin32Window()->Run();
 }
 
-void Application::SetOnIdleProc( pfn_OnIdle onIdle,void *pUserParm )
+void Application_win32::SetOnIdleProc( pfn_OnIdle onIdle,void *pUserParm )
 {
 	if(m_pWindows == nullptr)
 		return ;
 	
-	m_pWindows->SetOnIdleEvent(onIdle,pUserParm);
+	GetWin32Window()->SetOnIdleEvent(onIdle,pUserParm);
 }
 
-void Application::Close()
+void Application_win32::Close()
 {
 	if(m_pWindows)
 	{
-		m_pWindows->Close();
+		GetWin32Window()->Close();
 	}
 }
-
-void Application::Destroy( void )
-{
-	CH_SFDEL(m_pInstance);
-}
-
-Application * Application::m_pInstance;
 
 NS_CH_END
 

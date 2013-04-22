@@ -7,3 +7,9 @@ ipch
 *.sdf
 *.dll
 *.so
+Debug/
+Release/
+*.filters
+*.user
+*.suo
+obj/

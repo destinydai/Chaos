@@ -182,9 +182,10 @@ static void ShutDown()
 		m_pIndexBuffer->DeRef();
 }
 
-int game_main()
+
+int main(int argc, const char* argv[])
 {
-	if(!Application::Create(L"Chaos test window",CH_WIN_WIDTH,CH_WIN_HEIGHT))
+	if(!Application::GetInstancePtr()->Create(CH_WIN_WIDTH,CH_WIN_HEIGHT))
 	{
 		CH_TRACE("create application failed.");
 		return 1;
@@ -196,47 +197,14 @@ int game_main()
 	{
 		return 1;
 	}
-	
+
 	CH_TRACE("[app] Init succeed.");
-	
+
 	Application::GetInstancePtr()->SetOnIdleProc(Update,0);
 
 	Application::GetInstancePtr()->Run();
 
 	ShutDown();
 
-	Application::Destroy();
 	return 0;
 }
-
-
-#ifdef CH_ANDROID
-extern "C" {
-	JNIEXPORT void JNICALL Java_com_android_gl2jni_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height);
-	JNIEXPORT void JNICALL Java_com_android_gl2jni_GL2JNILib_step(JNIEnv * env, jobject obj);
-};
-
-
-JNIEXPORT void JNICALL Java_com_android_gl2jni_GL2JNILib_init(JNIEnv * env, jobject obj,  jint width, jint height)
-{
-	if(0!=game_main())
-	{
-		m_bCanRun=false;
-	}
-}
-
-JNIEXPORT void JNICALL Java_com_android_gl2jni_GL2JNILib_step(JNIEnv * env, jobject obj)
-{
-	if(m_bCanRun)
-	{
-		Update(0);
-	}
-}
-#endif
-
-#if defined CH_WINDOWS || _WIN32
-int main()
-{
-	return game_main();
-}
-#endif
