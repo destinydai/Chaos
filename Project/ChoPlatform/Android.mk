@@ -1,20 +1,18 @@
 LOCAL_PATH:= $(call my-dir)
 
-
-CH_PLATFORM_SOURCE := $(CH_SOURCE)/Platform/linux
-
 include $(CLEAR_VARS)
 LOCAL_MODULE := ChoPlatform
 
-LOCAL_CFLAGS    := -std=c++0x -DCH_LINUX= -DCH_ANDROID=
+LOCAL_CFLAGS    := -std=c++0x -D__ANDROID=
 
-LOCAL_SRC_FILES := $(CH_PLATFORM_SOURCE)/Tracer.cpp \
-                   $(CH_PLATFORM_SOURCE)/Console.cpp 
+LOCAL_SRC_FILES := ../../Source/Platform/Tracer.cpp \
+                   ../../Source/Platform/Window.cpp \
+				   ../../Source/Platform/android/NativeWindow_android.cpp 
                   
 
-
-LOCAL_C_INCLUDES := $(CH_INCLUDE)
-LOCAL_C_INCLUDES += $(LOCAL_PATH)
+LOCAL_C_INCLUDES := $(LOCAL_PATH)
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Include
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Source
 
 include $(BUILD_STATIC_LIBRARY)
 

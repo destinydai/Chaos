@@ -24,8 +24,9 @@ static bool m_bCanRun=true;
 
 static inline IRenderDevice *GetDevice() { return m_pRender; }
 
-static bool Init() 
+static bool Init(IRenderDevice *pRender)
 {
+	m_pRender = pRender;
 	char vShaderStr[] =  
 		"attribute vec4 a_position;   \n"
 		"attribute vec2 a_texCoord;   \n"
@@ -185,6 +186,9 @@ static void ShutDown()
 
 int main(int argc, const char* argv[])
 {
+	Application::GetInstancePtr()->SetOnIdleProc(Update,0);
+	Application::GetInstancePtr()->SetOnRenderDeviceCreated(Init);
+
 	if(!Application::GetInstancePtr()->Create(CH_WIN_WIDTH,CH_WIN_HEIGHT))
 	{
 		CH_TRACE("create application failed.");
@@ -193,14 +197,7 @@ int main(int argc, const char* argv[])
 
 	m_pRender = Application::GetInstancePtr()->GetRenderDevice();
 
-	if(false == Init())
-	{
-		return 1;
-	}
-
 	CH_TRACE("[app] Init succeed.");
-
-	Application::GetInstancePtr()->SetOnIdleProc(Update,0);
 
 	Application::GetInstancePtr()->Run();
 

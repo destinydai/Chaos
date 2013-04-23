@@ -14,9 +14,15 @@ private:
 
 public:
 	virtual void SetOnIdleProc(pfn_OnIdle onIdle,void *pUserParm);
+	virtual void SetOnRenderDeviceCreated(pfn_OnRenderDeviceCreated onRenderCreated)
+	{m_OnRenderDeviceCreated = onRenderCreated;}
 	virtual bool Create(uint nWidth,uint nHeight);
 	virtual void Close();
 	virtual void Run(void);
+private:
+	pfn_OnRenderDeviceCreated m_OnRenderDeviceCreated;
+	pfn_OnIdle m_OnIdle;
+	void* m_pUserData;
 };
 
 

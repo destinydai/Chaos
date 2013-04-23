@@ -11,10 +11,10 @@ inline Thread::~Thread()
 	m_thread = 0;
 }
 
-inline bool Thread::startThread( StartFunction f, void* pData, int threadStackSize /*= JU_THREAD_DEFAULT_STACKSIZE */ )
+inline bool Thread::startThread( StartFunction f, void* pData, int threadStackSize)
 {
 	int r= pthread_attr_setdetachstate(&m_threadAttr, PTHREAD_CREATE_JOINABLE);
-	r=pthread_create(&m_thread, &m_threadAttr, StartFunction, pData);
+	r=pthread_create(&m_thread, &m_threadAttr, f, pData);
 	return r==0;
 }
 

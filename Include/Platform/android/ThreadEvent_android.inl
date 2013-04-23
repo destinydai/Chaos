@@ -5,7 +5,7 @@ inline ThreadEvent::ThreadEvent( bool bManualReset,bool bInitialState ):
 	m_bManualReset(bManualReset)
 {
 	pthread_mutex_init(&m_mutex,nullptr);
-	pthread_cond_init(&m_event->cond, NULL);
+	pthread_cond_init(&m_event, NULL);
 }
 
 inline ThreadEvent::~ThreadEvent()
@@ -52,5 +52,5 @@ inline bool ThreadEvent::waitSignal( uint t )
 		r = pthread_cond_timedwait(&m_event,&m_mutex,getTimeout(&spec,t));
 	}
 	pthread_mutex_unlock(&m_mutex);
-	return r!=ETIMEDOUT;
+	return r==0;
 }

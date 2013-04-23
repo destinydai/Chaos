@@ -23,7 +23,8 @@ Application_android::Application_android( void ):
 	m_bRunning(false),
 	m_activityState(0),
 	m_pWindow(nullptr),
-	m_pPendingWindow(nullptr)
+	m_pPendingWindow(nullptr),
+	m_OnRenderDeviceCreated(nullptr)
 {
 
 }
@@ -89,12 +90,38 @@ void Application_android::ProcessSysEvent( void )
 	int8 cmd = m_pActivity->AppReadCmd();
 	PreProcessSysCmd(cmd);
 	//调用相应的注册回调
+
+	if(m_OnRenderDeviceCreated)
+	{
+		m_OnRenderDeviceCreated(m_pRenderDevice);
+	}
+
 	PostProcessSysCmd(cmd);
 }
 
 void Application_android::PreProcessSysCmd(int8 cmd)
 {
+	switch(cmd)
+	{
+	case APP_CMD_INIT_WINDOW:
+		CH_TRACE("[app] APP_CMD_INIT_WINDOW\n");
+		pthread_mutex_lock(&this->mutex);
+		this->m_pWindow = this->m_pPendingWindow;
 
+		m_pRenderDevice = CreateRender(this->m_pWindow);
+		if(m_pRenderDevice==nullptr)
+		{
+			CH_ERROR("[app] error: create render device failed.");
+		}
+		pthread_cond_broadcast(&this->cond);
+		pthread_mutex_unlock(&this->mutex);
+		break;
+
+	case APP_CMD_TERM_WINDOW:
+		CH_TRACE("APP_CMD_TERM_WINDOW\n");
+		pthread_cond_broadcast(&this->cond);
+		break;
+	}
 }
 
 void Application_android::PostProcessSysCmd(int8 cmd)
@@ -205,14 +232,14 @@ void Application_android::JvmOnNativeWindowCreated( ANativeActivity* activity, A
 {
 	Application_android* pApp =(Application_android*)activity->instance;
 	CH_TRACE("[app] NativeWindowCreated: %p -- %p", activity,window);
-	pApp->OnWindowCreated(window);
+	pApp->AppSetWindow(window);
 }
 
 void Application_android::JvmOnNativeWindowDestroyed( ANativeActivity* activity, ANativeWindow* window )
 {
 	Application_android* pApp =(Application_android*)activity->instance;
 	CH_TRACE("[app] NativeWindowDestroyed: %p -- %p", activity,window);
-	pApp->OnWindowDestroyed(window);
+	pApp->AppSetWindow(window);
 }
 
 void Application_android::JvmOnInputQueueCreated( ANativeActivity* activity, AInputQueue* queue )
@@ -379,27 +406,21 @@ void Application_android::AppInit(ANativeActivity* activity,void* savedState, si
 	pthread_mutex_unlock( &mutex);
 }
 
-void Application_android::OnWindowCreated(ANativeWindow* window)
+void Application_android::AppSetWindow(ANativeWindow* window)
 {
-	/*
 	pthread_mutex_lock(&mutex);
 	if (m_pPendingWindow != NULL) {
 		AppWriteCmd(APP_CMD_TERM_WINDOW);
 	}
-	m_pPendingWindow = window;
+	m_pPendingWindow = new NativeWindow_android(window);
 	if (window != NULL) {
-		android_app_write_cmd(android_app, APP_CMD_INIT_WINDOW);
+		AppWriteCmd(APP_CMD_INIT_WINDOW);
 	}
-	while (android_app->window != android_app->pendingWindow) {
-		pthread_cond_wait(&android_app->cond, &android_app->mutex);
+	while (this->m_pWindow != this->m_pPendingWindow) {
+		pthread_cond_wait(&this->cond, &this->mutex);
 	}
-	pthread_mutex_unlock(&android_app->mutex);
-	*/
-}
-
-void Application_android::OnWindowDestroyed( ANativeWindow* window)
-{
-
+	pthread_mutex_unlock(&this->mutex);
+	
 }
 
 void Application_android::OnInputQueueCreated( AInputQueue* queue )
@@ -410,6 +431,12 @@ void Application_android::OnInputQueueCreated( AInputQueue* queue )
 void Application_android::OnInputQueueDestroyed( AInputQueue* queue )
 {
 
+}
+
+IRenderDevice* Application_android::CreateRender(NativeWindow_android* pWnd)
+{
+	IRenderDevice* pDevice = CreateRenderDevice(pWnd,RenderDriverType::OPENGL,true);
+	return pDevice;
 }
 
 NS_CH_END

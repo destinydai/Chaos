@@ -3,7 +3,10 @@
 
 NS_CH_BEG
 
-Application_win32::Application_win32( void )
+Application_win32::Application_win32( void ):
+	m_OnRenderDeviceCreated(nullptr),
+	m_pUserData(nullptr),
+	m_OnIdle(nullptr)
 {
 	
 }
@@ -24,9 +27,16 @@ bool Application_win32::Create(uint nWidth,uint nHeight )
 		return false;
 	}
 
+	GetWin32Window()->SetOnIdleEvent(m_OnIdle,m_pUserData);
+
 	m_pRenderDevice = CreateRenderDevice(GetWin32Window()->GetWind(),RenderDriverType::OPENGL,true);
 	if(m_pRenderDevice== nullptr)
 		return false;
+
+	if(m_OnRenderDeviceCreated)
+	{
+		m_OnRenderDeviceCreated(m_pRenderDevice);
+	}
 
 	return true;
 }
@@ -41,10 +51,11 @@ void Application_win32::Run( void )
 
 void Application_win32::SetOnIdleProc( pfn_OnIdle onIdle,void *pUserParm )
 {
-	if(m_pWindows == nullptr)
-		return ;
-	
-	GetWin32Window()->SetOnIdleEvent(onIdle,pUserParm);
+	m_OnIdle = onIdle;
+	m_pUserData = pUserParm;
+
+	if(GetWin32Window())
+		GetWin32Window()->SetOnIdleEvent(onIdle,pUserParm);
 }
 
 void Application_win32::Close()

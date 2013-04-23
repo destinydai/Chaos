@@ -1,4 +1,3 @@
-NS_CH_BEG
 
 inline int Atomic::WaitForValueEqual( int* var, int value )
 {
@@ -46,5 +45,3 @@ inline int64 Atomic::AtomicExchange(volatile int64 *var, int64 value )
 	return *var;
 }
 
-
-NS_CH_END

@@ -44,12 +44,13 @@ private:\
 //open gl 
 #define CH_GLFAILCHECK { GLint error_code=glGetError(); CH_ASSERT(error_code==0,"error:%d GL fail check");}
 
-#ifdef CH_PLATFORM_WINDOWS
-	#include "Render/GL/GLEGL_Win32.h"
-#endif
 
-#ifdef CH_ANDROID
-#include "Render/GL/GLEGL_Android.h"
+#if CH_PLATFORM == CH_PLATFORM_WINDOWS
+	#include "Render/GL/GLEGL_Win32.h"
+#elif CH_PLATFORM == CH_PLATFORM_ANDROID
+	#include "Render/GL/GLEGL_Android.h"
+#else
+	CH_ERROR("not implement yet");
 #endif
 
 #include "Render/GL/GLRenderBase.h"

@@ -73,6 +73,7 @@ GLEGL * GLEGL::Create( void* hWnd )
 	{
 		return nullptr;
 	}
+	CH_TRACE("[rd] egl version %d.%d",majorVersion,minorVersion);
 
 	// Get configs
 	if ( !eglGetConfigs(display, NULL, 0, &numConfigs) )

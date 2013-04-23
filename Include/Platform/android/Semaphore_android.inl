@@ -7,7 +7,7 @@ inline Semaphore::Semaphore( int initialCount /*= 0*/, int maxCount /*= 0xffffff
 	int r = sem_init(&m_semaphore,0,initialCount);
 	if(0!=r)
 	{
-		CH_ERROR("sys_error:%d call API sem_init() failed.",strerror(errno));
+		CH_ERROR("sys_error: call API sem_init() failed.");
 	}
 }
 
@@ -41,6 +41,8 @@ inline void Semaphore::releaseSignal( int count /*= 1*/ )
 		r = sem_post(&m_semaphore);
 		--count;
 		if(r!=0)
-			CH_ERROR(("sys_error:%d call API sem_post() failed.",strerror(errno));
+		{
+			CH_ERROR("sys_error call API releaseSignal() failed.");
+		}
 	}
 }

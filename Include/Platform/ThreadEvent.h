@@ -36,7 +36,7 @@ private:
 #if CH_PLATFORM == CH_PLATFORM_WINDOWS
 #include "Platform/win32/ThreadEvent_win32.inl"
 #elif CH_PLATFORM == CH_PLATFORM_ANDROID
-#include "Platform/android/ThreadEvent.inl"
+#include "Platform/android/ThreadEvent_android.inl"
 #else
 	CH_ERROR("not implement yet");
 #endif

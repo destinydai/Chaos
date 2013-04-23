@@ -1,6 +1,5 @@
 #pragma once
 
-NS_CH_BEG
 
 inline CriticalSection::CriticalSection(int spinCount )
 {
@@ -22,6 +21,4 @@ inline void CriticalSection::leave()
 	pthread_mutex_unlock(&m_mutex);
 }
 
-
-NS_CH_END
 

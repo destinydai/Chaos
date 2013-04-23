@@ -82,7 +82,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\Include\ChoPlatform.h" />
     <ClInclude Include="..\..\Include\Platform\android\Helper.h" />
-    <ClInclude Include="..\..\Include\Platform\android\NativeActivity_android.h" />
     <ClInclude Include="..\..\Include\Platform\android\NativeWindow_android.h" />
     <ClInclude Include="..\..\Include\Platform\Atomic.h" />
     <ClInclude Include="..\..\Include\Platform\Config.h" />
@@ -97,8 +96,6 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\Platform\android\NativeActivity_android.cpp" />
-    <ClCompile Include="..\..\Source\Platform\android\NativeWindow_android.cpp" />
     <ClCompile Include="..\..\Source\Platform\Tracer.cpp" />
     <ClCompile Include="..\..\Source\Platform\win32\Win32Window.cpp" />
     <ClCompile Include="..\..\Source\Platform\Window.cpp" />
@@ -119,6 +116,8 @@
     <None Include="..\..\Include\Platform\win32\Semaphore_win32.inl" />
     <None Include="..\..\Include\Platform\win32\ThreadEvent_win32.inl" />
     <None Include="..\..\Include\Platform\win32\Thread_win32.inl" />
+    <None Include="..\..\Source\Platform\android\Tracer_android.inl" />
+    <None Include="..\..\Source\Platform\win32\Tracer_win32.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

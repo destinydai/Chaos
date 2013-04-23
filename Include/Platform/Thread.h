@@ -5,27 +5,12 @@ NS_CH_BEG
 class Thread
 {
 public:
-	typedef void (*StartFunction)(void*);
+	typedef void* (*StartFunction)(void*);
 
 	inline Thread();
 	inline ~Thread();
-	Thread(const Thread &obj)
-	{
-		Thread &a = const_cast<Thread&>(obj);
-		m_thread = a.m_thread;
-		m_threadID = a.m_threadID;
-		a.m_thread = 0;
-		a.m_threadID = 0;
-	}
-	Thread &operator =(const Thread &obj)
-	{
-		Thread &a = const_cast<Thread&>(obj);
-		m_thread = a.m_thread;
-		m_threadID = a.m_threadID;
-		a.m_thread = 0;
-		a.m_threadID = 0;
-		return *this;
-	};
+	Thread(const Thread &obj);
+	Thread &operator =(const Thread &obj);
 public:
 	enum{
 		THREAD_DEFAULT_STACKSIZE = 0,
@@ -38,7 +23,7 @@ public:
 		THREAD_NOT_STARTED
 	};
 
-	inline bool startThread(StartFunction f, void*, int threadStackSize = THREAD_DEFAULT_STACKSIZE );
+	inline bool startThread(StartFunction f, void* parm, int threadStackSize = THREAD_DEFAULT_STACKSIZE );
 
 	//Status getStatus();
 

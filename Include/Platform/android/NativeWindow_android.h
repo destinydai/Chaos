@@ -8,14 +8,14 @@ NS_CH_BEG
 class NativeWindow_android : public Window
 {
 public:
-	NativeWindow_android(NativeActivity_android* pActivity);
+	NativeWindow_android(ANativeWindow* pWnd);
 	virtual ~NativeWindow_android(void);
 
 public:
-	static void OnNativeWindowCreated(ANativeActivity* activity, ANativeWindow* pWnd);
+	ANativeWindow* GetNativeWindow() { return m_pNWnd; }
 
 protected:
-	NativeActivity_android* m_pActivity;
+	ANativeWindow* m_pNWnd;
 };
 
 NS_CH_END

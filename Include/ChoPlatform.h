@@ -13,8 +13,8 @@
 #if CH_PLATFORM == CH_PLATFORM_WINDOWS
 #include "Platform/win32/Win32Window.h"
 #elif CH_PLATFORM == CH_PLATFORM_ANDROID
-#include "Platform/android/Window_android.h"
-#include "Platform/android/NativeActivity_android.h"
+#include "Platform/android/NativeWindow_android.h"
+//#include "Platform/android/NativeActivity_android.h"
 #else
 
 #endif

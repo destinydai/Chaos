@@ -131,13 +131,17 @@ private:
 	void FreeSavedState();
 	void SetAppActivityState(int8_t cmd);
 
-	void OnWindowCreated(ANativeWindow* window);
-	void OnWindowDestroyed(ANativeWindow* window);
+	IRenderDevice* CreateRender(NativeWindow_android* pWnd);
+
+	void AppSetWindow(ANativeWindow* window);
 
 	void OnInputQueueCreated(AInputQueue* queue);
 	void OnInputQueueDestroyed(AInputQueue* queue);
 public: //interface 
 	virtual void SetOnIdleProc(pfn_OnIdle onIdle,void *pUserParm);
+	void SetOnRenderDeviceCreated( pfn_OnRenderDeviceCreated onRenderCreated )
+	{m_OnRenderDeviceCreated = onRenderCreated;}
+
 	virtual bool Create(uint nWidth,uint nHeight);
 	virtual void Close();
 	virtual void Run(void);
@@ -185,6 +189,7 @@ protected:
 	pfn_OnIdle m_pOnIdle;
 	void* m_pUserParm;
 	
+	pfn_OnRenderDeviceCreated m_OnRenderDeviceCreated;
 
 	bool m_bRunning;
 };
