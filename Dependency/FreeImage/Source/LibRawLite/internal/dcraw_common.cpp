@@ -112,6 +112,14 @@ double CLASS getreal (int type)
   }
 }
 
+#ifdef __ANDROID
+#include <assert.h>
+void swab(const void* from, void* to, ssize_t n)
+{
+	assert(false);
+}
+#endif
+
 void CLASS read_shorts (ushort *pixel, int count)
 {
   if (fread (pixel, 2, count, ifp) < count) derror();

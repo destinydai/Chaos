@@ -4,8 +4,8 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := ChoRender
-LOCAL_CFLAGS    := -std=c++0x -D__ANDROID=
-
+LOCAL_CFLAGS    := -std=c++0x -D__ANDROID= 
+#LOCAL_LDLIBS	:= -lEGL -lGLESv2
 LOCAL_SRC_FILES := ../../Source/Render/RenderDevice.cpp \
                    ../../Source/Render/GL/GLEGL_Android.cpp \
 				   ../../Source/Render/GL/GLInputLayout.cpp \
@@ -22,7 +22,7 @@ LOCAL_SRC_FILES := ../../Source/Render/RenderDevice.cpp \
                    
 LOCAL_C_INCLUDES := $(LOCAL_PATH)
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Dependency/glm940
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Dependency/android/include
+LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Dependency/FreeImage/Dist
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Source
 

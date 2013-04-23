@@ -11,6 +11,7 @@ public:
 	static Tracer* GetInstancePtr();
 
 	void Write(const char *info,...);
+	void WriteError(const char* info,...);
 };
 
 NS_CH_END

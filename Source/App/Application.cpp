@@ -3,7 +3,7 @@
 #if CH_PLATFORM == CH_PLATFORM_WINDOWS
 #include "App/win32/Application_win32.h"
 #elif CH_PLATFORM == CH_PLATFORM_ANDROID
-#include "App/win32/Application_win32.h"
+#include "App/android/Application_android.h"
 #else
 CH_ERROR("not implement yet");
 #endif

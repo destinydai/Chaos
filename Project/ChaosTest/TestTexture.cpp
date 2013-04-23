@@ -46,16 +46,16 @@ static bool Init(IRenderDevice *pRender)
 		"  gl_FragColor = texture2D( s_texture, v_texCoord );\n"
 		"}                                                   \n";
 	
-	CH_TRACE("[app] Begin create Vertex Shader.");
+	CH_TRACE("[game] Begin create Vertex Shader.");
 	m_pVertexShader = GetDevice()->CreateVertexShader(vShaderStr,sizeof(vShaderStr));
 	if(m_pVertexShader==0)
 		return false;
-	CH_TRACE("[app] Vertex Shader create succeed.");
+	CH_TRACE("[game] Vertex Shader create succeed.");
 	
 	m_pPixelShader = GetDevice()->CreatePixelShader(fShaderStr,sizeof(fShaderStr));
 	if(m_pPixelShader==0)
 		return false;
-	CH_TRACE("[app] Pixel Shader create succeed.");
+	CH_TRACE("[game] Pixel Shader create succeed.");
 	
 	m_pShaderProgram = GetDevice()->CreateShaderProgram(m_pVertexShader,m_pPixelShader);
 	if(m_pShaderProgram==0)
@@ -122,11 +122,17 @@ static bool Init(IRenderDevice *pRender)
 	IRenderResource::InitData texInitData;
 	texInitData.pSysMem = pixels;
 	
-	//m_pTexture = GetDevice()->CreateTexture2D(&texDesc,&texInitData);
+#if CH_PLATFORM == CH_PLATFORM_WINDOWS
 	m_pTexture = GetDevice()->CreateTexture2D("Data/d2.bmp");
+#elif CH_PLATFORM == CH_PLATFORM_ANDROID
+	m_pTexture = GetDevice()->CreateTexture2D(&texDesc,&texInitData);
+#else
+	CH_ERROR("not implement yet");
+#endif
+	
 	if(m_pTexture==0)
 	{
-		CH_TRACE("[app] load texture failed.");
+		CH_TRACE("[game] load texture failed.");
 		return false;
 	}
 	GetDevice()->SetClearColor(Color3(0,0,0));
@@ -138,12 +144,19 @@ static bool Init(IRenderDevice *pRender)
 	m_pTextureVariable = m_pShaderProgram->GetVariableByName("s_texture");
 	if(m_pTextureVariable == 0)
 		return false;
-
+	CH_TRACE("[game] init complete");
 	return true;
 }
 
 static void Draw()
 {
+	CH_TRACE("[game] draw called");
+
+	float r=(rand()%256) /256.0f;
+	float g=(rand()%256) /256.0f;
+	float b=(rand()%256) /256.0f;
+	GetDevice()->SetClearColor(Color3(r,g,b));
+
 	GetDevice()->ClearBuffer(true,true,true);
 
 	GetDevice()->SetShaderProgram(m_pShaderProgram);
@@ -194,10 +207,6 @@ int main(int argc, const char* argv[])
 		CH_TRACE("create application failed.");
 		return 1;
 	}
-
-	m_pRender = Application::GetInstancePtr()->GetRenderDevice();
-
-	CH_TRACE("[app] Init succeed.");
 
 	Application::GetInstancePtr()->Run();
 

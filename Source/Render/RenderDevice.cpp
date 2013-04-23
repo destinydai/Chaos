@@ -133,7 +133,16 @@ bool RenderDevice::Init(void* hWnd,bool bWindowed )
 	CH_TRACE("[rd] Vendor:%s",m_pEGL->GetVendor());
 	CH_TRACE("[rd] Renderer:%s",m_pEGL->GetRenderer());
 	CH_TRACE("[rd] Version:%s",m_pEGL->GetVersion());
-	CH_TRACE("[rd] Shading Language Version:%s",m_pEGL->GetShadingLanguageVersion());
+	const char* pShaderVersion = m_pEGL->GetShadingLanguageVersion();
+	if(pShaderVersion)
+	{
+		CH_TRACE("[rd] Shading Language Version:%s",pShaderVersion);
+	}
+	else
+	{
+		CH_TRACE("[rd] Shading Language Version:%s","no version information");
+	}
+	
 	
 	FreeImage_Initialise(true);
 	FreeImage_SetOutputMessage(FreeImageErrorHandler);

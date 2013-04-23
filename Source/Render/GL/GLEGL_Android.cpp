@@ -36,7 +36,7 @@ GLEGL * GLEGL::Create( void* hWnd )
 		EGL_NONE
 	};
 
-	EGLint format;
+	//EGLint format;
 	EGLint numConfigs;
 	EGLint majorVersion;
 	EGLint minorVersion;
@@ -72,12 +72,12 @@ GLEGL * GLEGL::Create( void* hWnd )
 		return nullptr;
 	}
 
-	if(!eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format))
-	{
-		return nullptr;
-	}
+	//if(!eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format))
+	//{
+	//	return nullptr;
+	//}
 
-	ANativeWindow_setBuffersGeometry(pWnd->GetNativeWindow(), 0, 0, format);
+	//ANativeWindow_setBuffersGeometry(pWnd->GetNativeWindow(), 0, 0, format);
 
 	// Create a surface
 	surface = eglCreateWindowSurface(display, config, (EGLNativeWindowType)pWnd->GetNativeWindow(), NULL);
@@ -87,8 +87,7 @@ GLEGL * GLEGL::Create( void* hWnd )
 	}
 
 	// Create a GL context
-	//context = eglCreateContext(display, config, EGL_NO_CONTEXT, contextAttribs );
-	context = eglCreateContext(display, config, EGL_NO_CONTEXT, nullptr );
+	context = eglCreateContext(display, config, EGL_NO_CONTEXT, contextAttribs );
 	if ( context == EGL_NO_CONTEXT )
 	{
 		return nullptr;
@@ -113,7 +112,10 @@ GLEGL * GLEGL::Create( void* hWnd )
 
 void GLEGL::SwapBuffers()
 {
-	
+	if (EGL_NO_DISPLAY != m_eglDisplay)
+	{
+		eglSwapBuffers(m_eglDisplay, m_eglSurface);
+	}
 }
 
 const char * GLEGL::GetVendor() const
@@ -140,7 +142,10 @@ const char * GLEGL::GetVersion() const
 const char * GLEGL::GetShadingLanguageVersion() const
 {
 	const GLubyte *szInfo = glGetString(GL_SHADING_LANGUAGE_VERSION);
-	CH_ASSERT(szInfo);
+	if(szInfo==nullptr)
+	{
+		CH_TRACE("[rd] error: call glGetString(GL_SHADING_LANGUAGE_VERSION) failed.");
+	}
 	return (const char*)szInfo;
 }
 

@@ -4,6 +4,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := ChoPlatform
 
 LOCAL_CFLAGS    := -std=c++0x -D__ANDROID=
+#LOCAL_LDLIBS	:= -llog -landroid 
 
 LOCAL_SRC_FILES := ../../Source/Platform/Tracer.cpp \
                    ../../Source/Platform/Window.cpp \

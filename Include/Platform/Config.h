@@ -109,7 +109,7 @@ if(NS_CH_NAME::Tracer::GetInstancePtr())\
 #define CH_ERROR(...) \
 if(NS_CH_NAME::Tracer::GetInstancePtr())\
 {\
-	NS_CH_NAME::Tracer::GetInstancePtr()->Write(__VA_ARGS__);\
+	NS_CH_NAME::Tracer::GetInstancePtr()->WriteError(__VA_ARGS__);\
 }\
 {__asm{int 3}}
 //ANDROID
@@ -118,7 +118,7 @@ if(NS_CH_NAME::Tracer::GetInstancePtr())\
 #define CH_ERROR(...) \
 if(NS_CH_NAME::Tracer::GetInstancePtr())\
 {\
-NS_CH_NAME::Tracer::GetInstancePtr()->Write(__VA_ARGS__);\
+NS_CH_NAME::Tracer::GetInstancePtr()->WriteError(__VA_ARGS__);\
 }\
 __android_log_assert("error","Chaos Engine","");
 //MACOS

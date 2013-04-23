@@ -39,7 +39,7 @@ GLEGL::GLEGL() : m_hWnd(NULL)
 GLEGL * GLEGL::Create( void* hWnd )
 {
 	GLEGL * pEGL = new GLEGL;
-#ifdef CH_PLATFORM_WINDOWS
+
 	EGLint attribList[] =
 	{
 		EGL_RED_SIZE,       8,
@@ -110,7 +110,7 @@ GLEGL * GLEGL::Create( void* hWnd )
 	pEGL->m_eglDisplay = display;
 	pEGL->m_eglSurface = surface;
 	pEGL->m_eglContext = context;
-#endif //CH_WINDOWS
+
 	return pEGL;
 }
 

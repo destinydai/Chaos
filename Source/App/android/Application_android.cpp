@@ -29,12 +29,39 @@ Application_android::Application_android( void ):
 
 }
 
-Application_android::~Application_android( void )
+
+void Application_android::ReleaseMember()
 {
 	NativeWindow_android* pWnd = GetNativeWindow();
 	CH_SFDEL(pWnd);
 	m_pWindows = nullptr;
+
+	m_pActivity = nullptr;
+	m_pOnIdle = nullptr;
+	m_pUserParm = nullptr;
+	m_pSensorManager=nullptr;
+	m_pAccelerometerSensor=nullptr;
+	m_pSensorEventQueue=nullptr;
+	m_bExit=false;
+	m_pSaveState=nullptr;
+	m_nSaveStateSize=0;
+	m_msgread=0;
+	m_msgwrite=0;
+	m_pAppConfig=nullptr;
+	m_pLooper=nullptr;
+	m_bRunning=false;
+	m_activityState=0;
+	m_pWindow=nullptr;
+	m_pPendingWindow=nullptr;
+	m_OnRenderDeviceCreated=nullptr;
+
 }
+
+Application_android::~Application_android( void )
+{
+	
+}
+
 
 void Application_android::PrintCurrentConfig()
 {
@@ -42,7 +69,7 @@ void Application_android::PrintCurrentConfig()
 	AConfiguration_getLanguage(m_pAppConfig, lang);
 	AConfiguration_getCountry(m_pAppConfig, country);
 
-	CH_TRACE("[pl] Config: mcc=%d mnc=%d lang=%c%c cnt=%c%c orien=%d touch=%d dens=%d "
+	CH_TRACE("[app] Config: mcc=%d mnc=%d lang=%c%c cnt=%c%c orien=%d touch=%d dens=%d "
 		"keys=%d nav=%d keysHid=%d navHid=%d sdk=%d size=%d long=%d "
 		"modetype=%d modenight=%d",
 		AConfiguration_getMcc(m_pAppConfig),
@@ -87,14 +114,10 @@ void Application_android::ProcessEvent( ASensorEvent* event )
 
 void Application_android::ProcessSysEvent( void )
 {
-	int8 cmd = m_pActivity->AppReadCmd();
+	int8 cmd =AppReadCmd();
 	PreProcessSysCmd(cmd);
 	//调用相应的注册回调
 
-	if(m_OnRenderDeviceCreated)
-	{
-		m_OnRenderDeviceCreated(m_pRenderDevice);
-	}
 
 	PostProcessSysCmd(cmd);
 }
@@ -113,6 +136,11 @@ void Application_android::PreProcessSysCmd(int8 cmd)
 		{
 			CH_ERROR("[app] error: create render device failed.");
 		}
+		else
+		{
+			CH_TRACE("[app] create render device succeed.");
+			m_OnRenderDeviceCreated(m_pRenderDevice);
+		}
 		pthread_cond_broadcast(&this->cond);
 		pthread_mutex_unlock(&this->mutex);
 		break;
@@ -120,6 +148,16 @@ void Application_android::PreProcessSysCmd(int8 cmd)
 	case APP_CMD_TERM_WINDOW:
 		CH_TRACE("APP_CMD_TERM_WINDOW\n");
 		pthread_cond_broadcast(&this->cond);
+		break;
+	case APP_CMD_RESUME:
+	case APP_CMD_START:
+	case APP_CMD_PAUSE:
+	case APP_CMD_STOP:
+		CH_TRACE("[app] activityState=%d\n", cmd);
+		pthread_mutex_lock(&mutex);
+		m_activityState = cmd;
+		pthread_cond_broadcast(&cond);
+		pthread_mutex_unlock(&mutex);
 		break;
 	}
 }
@@ -137,7 +175,7 @@ void Application_android::FreeSavedState()
 
 void Application_android::JvmOnDestroy( ANativeActivity* activity )
 {
-	CH_TRACE("Activity Destroy: %p\n", activity);
+	CH_TRACE("[app] Activity Destroy: %p\n", activity);
 
 }
 
@@ -157,14 +195,14 @@ void Application_android::SetAppActivityState( int8_t cmd )
 void Application_android::JvmOnStart( ANativeActivity* activity )
 {
 	Application_android* pApp =(Application_android*)activity->instance;
-	CH_TRACE("Activity Start: %p", activity);
+	CH_TRACE("[app] Activity Start: %p", activity);
 	pApp->SetAppActivityState(APP_CMD_START);
 }
 
 void Application_android::JvmOnResume( ANativeActivity* activity )
 {
 	Application_android* pApp =(Application_android*)activity->instance;
-	CH_TRACE("Resume: %p", activity);
+	CH_TRACE("[app] Resume: %p", activity);
 	pApp->SetAppActivityState(APP_CMD_RESUME);
 }
 
@@ -258,16 +296,16 @@ void Application_android::JvmOnInputQueueDestroyed( ANativeActivity* activity, A
 
 void Application_android::AppWriteCmd( int8_t cmd)
 {
-	if (write(m_msgwrite, &cmd, 0) 
+	 if (write(m_msgwrite, &cmd, sizeof(cmd)) != sizeof(cmd)) 
 	{
-		CH_ERROR("Failure writing android_app cmd: %s\n", strerror(errno));
+		CH_ERROR("Failure writing android_app cmd \n");
 	}
 }
 
 int8_t Application_android::AppReadCmd()
 {
 	int8_t cmd;
-	if (read(m_msgread, &cmd, sizeof(cmd)) == sizeof(cmd)) {
+	 if (read(m_msgread, &cmd, sizeof(cmd)) == sizeof(cmd)) {
 		switch (cmd) {
 		case APP_CMD_SAVE_STATE:
 			FreeSavedState();
@@ -293,7 +331,7 @@ void Application_android::Run( void )
 		{
 			this->ProcessSysEvent();
 
-			if(ident == NativeActivity_android::LOOPER_ID_USER)
+			if(ident == LOOPER_ID_USER)
 			{
 				if(m_pAccelerometerSensor != nullptr)
 				{
@@ -311,14 +349,14 @@ void Application_android::Run( void )
 
 		}//all message in queue has been processed
 
-		if(m_pOnIdle)
+		if(m_pOnIdle && m_pRenderDevice)
 		{
 			m_pOnIdle(m_pUserParm);
 		}
 	}
 }
 
-void Application_android::RunActivityThread( void* param )
+void* Application_android::RunActivityThread( void* param )
 {
 	Application_android* pApp = (Application_android*)param;
 	pApp->RunActive();
@@ -337,7 +375,8 @@ void Application_android::RunActive()
 		CH_ERROR("[pl] error: call ALooper_addFd api failed.");
 		return;
 	}
-	//notify jvm thread looper has setuped
+
+	CH_TRACE("[app] notify jvm thread looper has setuped");
 	pthread_mutex_lock(&mutex);
 	m_bRunning = true;
 	pthread_cond_broadcast(&cond);
@@ -345,7 +384,8 @@ void Application_android::RunActive()
 
 	m_pSensorManager = ASensorManager_getInstance();
 	m_pAccelerometerSensor = ASensorManager_getDefaultSensor(m_pSensorManager,ASENSOR_TYPE_ACCELEROMETER);
-	m_pSensorEventQueue = ASensorManager_createEventQueue(m_pSensorManager);
+	m_pSensorEventQueue = ASensorManager_createEventQueue(m_pSensorManager,
+		m_pLooper, LOOPER_ID_USER, NULL, NULL);
 
 	const char* szParms[1] = {"/"};
 	main(1,szParms);
@@ -353,6 +393,8 @@ void Application_android::RunActive()
 
 void Application_android::AppInit(ANativeActivity* activity,void* savedState, size_t savedStateSize)
 {
+	ReleaseMember();
+
 	CH_TRACE("[app] NativeActivity create complete %p", activity);
 	activity->callbacks->onDestroy = JvmOnDestroy;
 	activity->callbacks->onStart = JvmOnStart;
@@ -370,17 +412,25 @@ void Application_android::AppInit(ANativeActivity* activity,void* savedState, si
 	activity->instance = this;
 	m_pActivity = activity;
 
+	int r = pthread_mutex_init(&mutex, NULL);
+	r= pthread_cond_init(&cond, NULL);
+
+	if(r!=0)
+	{
+		CH_ERROR("[app] error: init mutex or cond failed.");
+	}
+
 	if(savedState!=nullptr)
 	{
 		m_pSaveState = new char[savedStateSize];
-		memccpy(m_pSaveState,savedState,savedStateSize);
+		memcpy(m_pSaveState,savedState,savedStateSize);
 		m_nSaveStateSize=savedStateSize;
 	}
 
 	int msgpipe[2];
 	if(pipe(msgpipe))
 	{
-		CH_ERROR("[pl] error: call pipe failed in Application_android::AppInit, could not create pipe:%s",strerror(errno));
+		CH_ERROR("[pl] error: call pipe failed in Application_android::AppInit, could not create pipe ");
 		return;
 	}
 
@@ -390,7 +440,7 @@ void Application_android::AppInit(ANativeActivity* activity,void* savedState, si
 	pthread_attr_t attr; 
 	pthread_attr_init(&attr);
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-	int r =pthread_create(&m_thread, &attr, Application_android::RunActivityThread, this);
+	r =pthread_create(&m_thread, &attr, Application_android::RunActivityThread, this);
 	if(r!=0)
 	{
 		CH_ERROR("[app] error: pthread_create failed. ");
@@ -398,7 +448,7 @@ void Application_android::AppInit(ANativeActivity* activity,void* savedState, si
 	}
 
 	//等待Activity Thread 开始工作
-	// Wait for thread to start.
+	CH_TRACE("[app] wait main msg loop thread to start. ");
 	pthread_mutex_lock(&mutex);
 	while (!this->m_bRunning) {
 		pthread_cond_wait(&cond, &mutex);
@@ -439,11 +489,14 @@ IRenderDevice* Application_android::CreateRender(NativeWindow_android* pWnd)
 	return pDevice;
 }
 
+
+
 NS_CH_END
 
 
 void ANativeActivity_onCreate(ANativeActivity* activity,void* savedState, size_t savedStateSize) 
 {
+		using namespace NS_CH_NAME;
 		Application_android* pApp =(Application_android*)Application_android::GetInstancePtr();
 		pApp->AppInit(activity,savedState,savedStateSize);
 }
