@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{b9377c55-98d8-4482-b24e-f28a551f7a86}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Geometry\Shape.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Geometry\GeometryDecl.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Geometry\MeshShape.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Geometry\TriListShape.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Geometry\TriStripShape.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Geometry\SphereShape.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Geometry\BBoxShape.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Geometry\TransformShape.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\ChoGeometry.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Geometry\Shape.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Geometry\MeshShape.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Geometry\TriListShape.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Geometry\TriStripShape.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Geometry\SphereShape.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Geometry\BBoxShape.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Geometry\TransformShape.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

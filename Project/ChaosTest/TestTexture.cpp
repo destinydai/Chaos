@@ -24,8 +24,13 @@ static bool m_bCanRun=true;
 
 static inline IRenderDevice *GetDevice() { return m_pRender; }
 
+
+void TestResMgr();
+
 static bool Init(IRenderDevice *pRender)
 {
+	TestResMgr();
+
 	m_pRender = pRender;
 	char vShaderStr[] =  
 		"attribute vec4 a_position;   \n"
@@ -125,7 +130,8 @@ static bool Init(IRenderDevice *pRender)
 #if CH_PLATFORM == CH_PLATFORM_WINDOWS
 	m_pTexture = GetDevice()->CreateTexture2D("Data/d2.bmp");
 #elif CH_PLATFORM == CH_PLATFORM_ANDROID
-	m_pTexture = GetDevice()->CreateTexture2D(&texDesc,&texInitData);
+	//m_pTexture = GetDevice()->CreateTexture2D(&texDesc,&texInitData);
+	m_pTexture = GetDevice()->CreateTexture2D("Data/d2.bmp");
 #else
 	CH_ERROR("not implement yet");
 #endif
@@ -150,8 +156,6 @@ static bool Init(IRenderDevice *pRender)
 
 static void Draw()
 {
-	CH_TRACE("[game] draw called");
-
 	float r=(rand()%256) /256.0f;
 	float g=(rand()%256) /256.0f;
 	float b=(rand()%256) /256.0f;
@@ -196,6 +200,13 @@ static void ShutDown()
 		m_pIndexBuffer->DeRef();
 }
 
+void PrintStringArray(const StringArray& arr)
+{
+	for(int i=0; i<arr.size(); ++i)
+	{
+		CH_TRACE("%s",arr[i].c_str());
+	}
+}
 
 int main(int argc, const char* argv[])
 {
@@ -213,4 +224,34 @@ int main(int argc, const char* argv[])
 	ShutDown();
 
 	return 0;
+}
+
+
+
+void TestResMgr()
+{
+#if CH_PLATFORM == CH_PLATFORM_WINDOWS
+	IFileDirectory* pDirInclude = FileSystem::GetInstancePtr()->OpenDirectory("Include");
+	IFileDirectory* pDirSource = FileSystem::GetInstancePtr()->OpenDirectory("Source/");
+	IFileDirectory* pDirData = FileSystem::GetInstancePtr()->OpenDirectory("./Data/");
+
+	StringArray arrIncludes,arrSource,arrDatas;
+	pDirInclude->ListAllFiles(arrIncludes);
+	pDirSource->ListAllFiles(arrSource);
+	pDirData->ListAllFiles(arrDatas);
+	PrintStringArray(arrIncludes);
+	PrintStringArray(arrSource);
+	PrintStringArray(arrDatas);
+
+	StringArray inFolder,srcFolder;
+	pDirInclude->ListAllDirectory(inFolder);
+	pDirSource->ListAllDirectory(srcFolder);
+	PrintStringArray(inFolder);
+	PrintStringArray(srcFolder);
+#endif
+	CH_TRACE("[game] begin list root files");
+	IFileDirectory* pRoot = FileSystem::GetInstancePtr()->OpenDirectory("Data");
+	StringArray dataFiles;
+	pRoot->ListFiles(dataFiles);
+	PrintStringArray(dataFiles);
 }

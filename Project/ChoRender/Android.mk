@@ -7,7 +7,7 @@ LOCAL_MODULE := ChoRender
 LOCAL_CFLAGS    := -std=c++0x -D__ANDROID= 
 #LOCAL_LDLIBS	:= -lEGL -lGLESv2
 LOCAL_SRC_FILES := ../../Source/Render/RenderDevice.cpp \
-                   ../../Source/Render/GL/GLEGL_Android.cpp \
+                   ../../Source/Render/GL/GLEGL.cpp \
 				   ../../Source/Render/GL/GLInputLayout.cpp \
 				   ../../Source/Render/GL/GLPixelShader.cpp \
 				   ../../Source/Render/GL/GLRenderBase.cpp \

@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="GL">
+      <UniqueIdentifier>{b60abadc-1709-4478-8b45-cd802f0e521a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GL\Shaders">
+      <UniqueIdentifier>{a218f236-1277-4bc8-a673-a5ecc41724c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DX">
+      <UniqueIdentifier>{5863ab49-112e-4a39-ba64-357249963df4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Render\IRenderDevice.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\ChoRender.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\RenderDecl.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLPixelShader.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLShader.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLShaderProgram.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLVertexShader.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\RenderDevice.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GlesSyntax.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLRenderBuffer.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLInputLayout.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLShaderVariable.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLRenderDevice.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLShaderVertexAttribute.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLES_Shader\GLDirectionalLightShader_v.h">
+      <Filter>GL\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLES_Shader\GLDirectionalLightShader_p.h">
+      <Filter>GL\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLTexture2D.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\DX\HLSLSyntax.h">
+      <Filter>DX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Render\GL\GLEGL.h">
+      <Filter>GL</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLRenderDevice.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLVertexShader.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLPixelShader.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLShader.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLShaderProgram.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\RenderDevice.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLRenderBuffer.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLInputLayout.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLShaderVariable.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLShaderVertexAttribute.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLTexture2D.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Render\GL\GLEGL.cpp">
+      <Filter>GL</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

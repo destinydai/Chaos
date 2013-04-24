@@ -86,6 +86,7 @@
     <ClInclude Include="..\..\Include\Platform\Atomic.h" />
     <ClInclude Include="..\..\Include\Platform\Config.h" />
     <ClInclude Include="..\..\Include\Platform\CriticalSection.h" />
+    <ClInclude Include="..\..\Include\Platform\FileSystem.h" />
     <ClInclude Include="..\..\Include\Platform\Semaphore.h" />
     <ClInclude Include="..\..\Include\Platform\Thread.h" />
     <ClInclude Include="..\..\Include\Platform\ThreadEvent.h" />
@@ -93,10 +94,28 @@
     <ClInclude Include="..\..\Include\Platform\Tracer.h" />
     <ClInclude Include="..\..\Include\Platform\win32\Win32Window.h" />
     <ClInclude Include="..\..\Include\Platform\Window.h" />
+    <ClInclude Include="..\..\Source\Platform\android\FileSystem\FileDirectory_android.h" />
+    <ClInclude Include="..\..\Source\Platform\android\FileSystem\FileStream_android.h" />
+    <ClInclude Include="..\..\Source\Platform\android\FileSystem\FileSystem_android.h" />
+    <ClInclude Include="..\..\Source\Platform\FileDirectory.h" />
+    <ClInclude Include="..\..\Source\Platform\FileStream.h" />
+    <ClInclude Include="..\..\Source\Platform\PlatformInner.h" />
+    <ClInclude Include="..\..\Source\Platform\win32\FileSystem\FileDirectory_win32.h" />
+    <ClInclude Include="..\..\Source\Platform\win32\FileSystem\FileStream_win32.h" />
+    <ClInclude Include="..\..\Source\Platform\win32\FileSystem\FileSystem_win32.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\Platform\android\FileSystem\FileDirectory_android.cpp" />
+    <ClCompile Include="..\..\Source\Platform\android\FileSystem\FileStream_android.cpp" />
+    <ClCompile Include="..\..\Source\Platform\android\FileSystem\FileSystem_android.cpp" />
+    <ClCompile Include="..\..\Source\Platform\FileDirectory.cpp" />
+    <ClCompile Include="..\..\Source\Platform\FileStream.cpp" />
+    <ClCompile Include="..\..\Source\Platform\FileSystem.cpp" />
     <ClCompile Include="..\..\Source\Platform\Tracer.cpp" />
+    <ClCompile Include="..\..\Source\Platform\win32\FileSystem\FileDirectory_win32.cpp" />
+    <ClCompile Include="..\..\Source\Platform\win32\FileSystem\FileStream_win32.cpp" />
+    <ClCompile Include="..\..\Source\Platform\win32\FileSystem\FileSystem_win32.cpp" />
     <ClCompile Include="..\..\Source\Platform\win32\Win32Window.cpp" />
     <ClCompile Include="..\..\Source\Platform\Window.cpp" />
     <ClCompile Include="stdafx.cpp">

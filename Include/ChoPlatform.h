@@ -9,6 +9,7 @@
 #include "Platform/Thread.h"
 #include "Platform/Atomic.h"
 #include "Platform/Window.h"
+#include "Platform/FileSystem.h"
 
 #if CH_PLATFORM == CH_PLATFORM_WINDOWS
 #include "Platform/win32/Win32Window.h"

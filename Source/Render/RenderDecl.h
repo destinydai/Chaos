@@ -5,21 +5,20 @@
 
 #include "FreeImage.h"
 
-#ifdef CH_PLATFORM_WINDOWS
+
+#if CH_PLATFORM == CH_PLATFORM_WINDOWS
 //#include <GL/glew.h>
 //#include <GL/wglew.h>
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
-#endif
-
-#if defined  CH_ANDROID
-//#include <EGL/egl.h>
+#elif CH_PLATFORM == CH_PLATFORM_ANDROID
+#include <EGL/egl.h>
 #include <GLES2/gl2.h>
 #include <GLES2/gl2ext.h>
+#else
+	CH_ERROR("not implement yet");
 #endif
-
-
 
 
 
@@ -45,14 +44,7 @@ private:\
 #define CH_GLFAILCHECK { GLint error_code=glGetError(); CH_ASSERT(error_code==0,"error:%d GL fail check");}
 
 
-#if CH_PLATFORM == CH_PLATFORM_WINDOWS
-	#include "Render/GL/GLEGL_Win32.h"
-#elif CH_PLATFORM == CH_PLATFORM_ANDROID
-	#include "Render/GL/GLEGL_Android.h"
-#else
-	CH_ERROR("not implement yet");
-#endif
-
+#include "Render/GL/GLEGL.h"
 #include "Render/GL/GLRenderBase.h"
 #include "Render/GL/GLShader.h"
 #include "Render/GL/GLVertexShader.h"

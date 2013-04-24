@@ -88,8 +88,7 @@
     <ClInclude Include="..\..\Include\ChoRender.h" />
     <ClInclude Include="..\..\Include\Render\IRenderDevice.h" />
     <ClInclude Include="..\..\Source\Render\DX\HLSLSyntax.h" />
-    <ClInclude Include="..\..\Source\Render\GL\GLEGL_Android.h" />
-    <ClInclude Include="..\..\Source\Render\GL\GLEGL_Win32.h" />
+    <ClInclude Include="..\..\Source\Render\GL\GLEGL.h" />
     <ClInclude Include="..\..\Source\Render\GL\GlesSyntax.h" />
     <ClInclude Include="..\..\Source\Render\GL\GLES_Shader\GLDirectionalLightShader_p.h" />
     <ClInclude Include="..\..\Source\Render\GL\GLES_Shader\GLDirectionalLightShader_v.h" />
@@ -108,8 +107,7 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Source\Render\GL\GLEGL_Android.cpp" />
-    <ClCompile Include="..\..\Source\Render\GL\GLEGL_Win32.cpp" />
+    <ClCompile Include="..\..\Source\Render\GL\GLEGL.cpp" />
     <ClCompile Include="..\..\Source\Render\GL\GLInputLayout.cpp" />
     <ClCompile Include="..\..\Source\Render\GL\GLPixelShader.cpp" />
     <ClCompile Include="..\..\Source\Render\GL\GLRenderBuffer.cpp" />

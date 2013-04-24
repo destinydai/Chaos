@@ -51,6 +51,8 @@ using std::map;
 using std::set;
 using std::swap;
 
+typedef std::vector<std::string> StringArray;
+
 //include platform api
 #if CH_PLATFORM == CH_PLATFORM_WINDOWS
 #define WIN32_LEAN_AND_MEAN

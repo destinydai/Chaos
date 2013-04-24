@@ -5,6 +5,6 @@
 
 #define WIN32_LEAN_AND_MEAN
 
-#include "ChoPlatform.h"
+#include "Platform/PlatformInner.h"
 
 

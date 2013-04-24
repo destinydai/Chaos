@@ -391,21 +391,35 @@ ITexture2D* GLRenderDevice::CreateTexture2D(const char *szFilePath)
 	uint width=0, height=0;
 
 	uint nBpp=0; 
+	
+	IFileStream* pFileStream = FileSystem::GetInstancePtr()->OpenFile(szFilePath,FILE_OPEN_READ);
+	char* pFileDataBuffer=nullptr;
+	uint nFileDataLength= pFileStream->GetFileSize();
+	if(nFileDataLength==0)
+	{
+		CH_ERROR("[rd] error: the texture is empty");
+	}
+	pFileDataBuffer = new char[nFileDataLength];
+	pFileStream->Read(pFileDataBuffer,nFileDataLength);
+	CH_SFDEL(pFileStream);
+
+	FIMEMORY* hmem = FreeImage_OpenMemory((BYTE*)pFileDataBuffer,nFileDataLength);
+	
 
 	//check the file signature and deduce its format
-	fif = FreeImage_GetFileType(szFilePath, 0);
-	//if still unknown, try to guess the file format from the file extension
-	if(fif == FIF_UNKNOWN) 
-		fif = FreeImage_GetFIFFromFilename(szFilePath);
-	//if still unkown, return failure
+	fif = FreeImage_GetFileTypeFromMemory(hmem, nFileDataLength);
 	if(fif == FIF_UNKNOWN)
 	{
 		CH_TRACE("[rd] error: can not load the texture. %s",szFilePath);
+		CH_SFDELARR(pFileDataBuffer);
 		return nullptr;
 	}
 	//check that the plugin has reading capabilities and load the file
 	if(FreeImage_FIFSupportsReading(fif))
-		dib = FreeImage_Load(fif, szFilePath);
+	{
+		dib = FreeImage_LoadFromMemory(fif,hmem,0);
+		CH_SFDELARR(pFileDataBuffer);
+	}
 	//if the image failed to load, return failure
 	if(!dib)
 	{

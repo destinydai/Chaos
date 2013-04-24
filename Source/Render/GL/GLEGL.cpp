@@ -9,12 +9,13 @@ GLEGL::GLEGL() : m_hWnd(NULL)
 	, m_eglDisplay(EGL_NO_DISPLAY)
 	, m_eglSurface(EGL_NO_SURFACE)
 	, m_eglContext(EGL_NO_CONTEXT)
+	,m_nWidth(0)
+	,m_nHeight(0)
 {
 
 }
 
-
-	GLEGL::~GLEGL()
+GLEGL::~GLEGL()
 {
 	if (EGL_NO_SURFACE != m_eglSurface)
 	{
@@ -28,7 +29,7 @@ GLEGL::GLEGL() : m_hWnd(NULL)
 	eglMakeCurrent(m_eglDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
 	eglTerminate(m_eglDisplay);
 
-#ifdef CH_PLATFORM_WINDOWS
+#if CH_PLATFORM == CH_PLATFORM_WINDOWS
 	if (m_hWnd)
 	{
 		ReleaseDC(m_hWnd, m_hdc);
@@ -36,7 +37,7 @@ GLEGL::GLEGL() : m_hWnd(NULL)
 #endif
 }
 
-GLEGL * GLEGL::Create( void* hWnd )
+GLEGL * GLEGL::Create( void* hWnd, int nWidth, int nHeight )
 {
 	GLEGL * pEGL = new GLEGL;
 
@@ -52,6 +53,7 @@ GLEGL * GLEGL::Create( void* hWnd )
 		EGL_NONE
 	};
 
+	EGLint format;
 	EGLint numConfigs;
 	EGLint majorVersion;
 	EGLint minorVersion;
@@ -62,7 +64,7 @@ GLEGL * GLEGL::Create( void* hWnd )
 	EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE, EGL_NONE };
 
 	// Get Display
-	display = eglGetDisplay(GetDC((HWND)hWnd));
+	display = eglGetDisplay(EGL_DEFAULT_DISPLAY);
 	if ( display == EGL_NO_DISPLAY )
 	{
 		return nullptr;
@@ -87,6 +89,20 @@ GLEGL * GLEGL::Create( void* hWnd )
 		return nullptr;
 	}
 
+	if(!eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format))
+	{
+		return nullptr;
+	}
+
+#if CH_PLATFORM == CH_PLATFORM_WINDOWS
+
+#elif CH_PLATFORM == CH_PLATFORM_ANDROID
+	int r =ANativeWindow_setBuffersGeometry((ANativeWindow*)hWnd,nWidth,nHeight,format);
+	//nWidth = ANativeWindow_getWidth((ANativeWindow*)hWnd);
+	//nHeight =ANativeWindow_getHeight((ANativeWindow*)hWnd);
+	CH_TRACE("[rd] Window width:%d height:%d",nWidth,nHeight);
+#endif
+
 	// Create a surface
 	surface = eglCreateWindowSurface(display, config, (EGLNativeWindowType)hWnd, NULL);
 	if ( surface == EGL_NO_SURFACE )
@@ -110,6 +126,8 @@ GLEGL * GLEGL::Create( void* hWnd )
 	pEGL->m_eglDisplay = display;
 	pEGL->m_eglSurface = surface;
 	pEGL->m_eglContext = context;
+	pEGL->m_nWidth = nWidth;
+	pEGL->m_nHeight = nHeight;
 
 	return pEGL;
 }
@@ -146,7 +164,10 @@ const char * GLEGL::GetVersion() const
 const char * GLEGL::GetShadingLanguageVersion() const
 {
 	const GLubyte *szInfo = glGetString(GL_SHADING_LANGUAGE_VERSION);
-	CH_ASSERT(szInfo);
+	if(szInfo==nullptr)
+	{
+		CH_TRACE("[rd] error: call glGetString(GL_SHADING_LANGUAGE_VERSION) failed.");
+	}
 	return (const char*)szInfo;
 }
 

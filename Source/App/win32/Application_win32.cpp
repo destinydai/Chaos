@@ -29,7 +29,7 @@ bool Application_win32::Create(uint nWidth,uint nHeight )
 
 	GetWin32Window()->SetOnIdleEvent(m_OnIdle,m_pUserData);
 
-	m_pRenderDevice = CreateRenderDevice(GetWin32Window()->GetWind(),RenderDriverType::OPENGL,true);
+	m_pRenderDevice = CreateRenderDevice(GetWin32Window()->GetWind(),nWidth,nHeight,RenderDriverType::OPENGL,true);
 	if(m_pRenderDevice== nullptr)
 		return false;
 

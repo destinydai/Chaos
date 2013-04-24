@@ -23,14 +23,19 @@ inline int Atomic::WaitForValueNotEqual( int* var, int value )
 
 inline int Atomic::AtomicAdd(volatile int* var, int value )
 {
-	(*var)+=value;
-	return *var;
+	if(value>0)
+	{
+		return __sync_fetch_and_add(var,value);
+	}
+	else
+	{
+		return __sync_fetch_and_sub(var,-value);
+	}
 }
 
 inline int Atomic::AtomicExchange(volatile int *var, int value )
 {
-	(*var)=value;
-	return *var;
+	return __atomic_swap(value,var);
 }
 
 inline int64 Atomic::AtomicAdd(volatile int64* var, int64 value )

@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Win32">
+      <UniqueIdentifier>{cc315afa-a2bd-41ef-b000-96db030965cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Linux">
+      <UniqueIdentifier>{74211a65-b34f-422c-ae96-1d392b9ca742}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Android">
+      <UniqueIdentifier>{72dac9f6-5a94-4c61-9c3a-45b4067a32fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Android\FileSystem">
+      <UniqueIdentifier>{1e6fcec0-2f7b-4aad-b568-f9fd88dcce30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Win32\FileSystem">
+      <UniqueIdentifier>{1183a219-4fc6-4c63-8cd4-946c845ba02f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\Config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\ChoPlatform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\win32\Win32Window.h">
+      <Filter>Win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\Atomic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\CriticalSection.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\Semaphore.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\Thread.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\ThreadEvent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\ThreadPool.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\Tracer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\android\Helper.h">
+      <Filter>Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\android\NativeWindow_android.h">
+      <Filter>Android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Platform\FileSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Platform\PlatformInner.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Platform\android\FileSystem\FileStream_android.h">
+      <Filter>Android\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Platform\FileStream.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Platform\android\FileSystem\FileDirectory_android.h">
+      <Filter>Android\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Platform\FileDirectory.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Platform\android\FileSystem\FileSystem_android.h">
+      <Filter>Android\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Platform\win32\FileSystem\FileSystem_win32.h">
+      <Filter>Win32\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Platform\win32\FileSystem\FileDirectory_win32.h">
+      <Filter>Win32\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Platform\win32\FileSystem\FileStream_win32.h">
+      <Filter>Win32\FileSystem</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\Tracer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\Window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\win32\Win32Window.cpp">
+      <Filter>Win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\FileSystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\android\FileSystem\FileStream_android.cpp">
+      <Filter>Android\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\FileStream.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\android\FileSystem\FileDirectory_android.cpp">
+      <Filter>Android\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\FileDirectory.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\android\FileSystem\FileSystem_android.cpp">
+      <Filter>Android\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\win32\FileSystem\FileSystem_win32.cpp">
+      <Filter>Win32\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\win32\FileSystem\FileDirectory_win32.cpp">
+      <Filter>Win32\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Platform\win32\FileSystem\FileStream_win32.cpp">
+      <Filter>Win32\FileSystem</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Include\Platform\android\Application_android.inl">
+      <Filter>Android</Filter>
+    </None>
+    <None Include="..\..\Include\Platform\android\Atomic_android.inl">
+      <Filter>Android</Filter>
+    </None>
+    <None Include="..\..\Include\Platform\android\CriticalSection_android.inl">
+      <Filter>Android</Filter>
+    </None>
+    <None Include="..\..\Include\Platform\android\Thread_android.inl">
+      <Filter>Android</Filter>
+    </None>
+    <None Include="..\..\Include\Platform\android\ThreadEvent_android.inl">
+      <Filter>Android</Filter>
+    </None>
+    <None Include="..\..\Include\Platform\win32\Atomic_win32.inl">
+      <Filter>Win32</Filter>
+    </None>
+    <None Include="..\..\Include\Platform\win32\CriticalSection_win32.inl">
+      <Filter>Win32</Filter>
+    </None>
+    <None Include="..\..\Include\Platform\win32\Semaphore_win32.inl">
+      <Filter>Win32</Filter>
+    </None>
+    <None Include="..\..\Include\Platform\win32\Thread_win32.inl">
+      <Filter>Win32</Filter>
+    </None>
+    <None Include="..\..\Include\Platform\win32\ThreadEvent_win32.inl">
+      <Filter>Win32</Filter>
+    </None>
+    <None Include="..\..\Include\Platform\android\Semaphore_android.inl">
+      <Filter>Android</Filter>
+    </None>
+    <None Include="..\..\Source\Platform\android\Tracer_android.inl">
+      <Filter>Android</Filter>
+    </None>
+    <None Include="..\..\Source\Platform\win32\Tracer_win32.inl">
+      <Filter>Win32</Filter>
+    </None>
+  </ItemGroup>
+</Project>

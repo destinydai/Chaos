@@ -194,6 +194,8 @@ protected:
 	int m_activityState;
 	bool m_bStateSaved;
 
+	int m_nWidth,m_nHeight;
+
 	pfn_OnIdle m_pOnIdle;
 	void* m_pUserParm;
 	

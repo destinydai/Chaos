@@ -6,7 +6,7 @@ NS_CH_BEG
 class ReferencedObject : public Object
 {
 	CH_OBJ_TYPE_DECL(ReferencedObject,Object)
-public:
+protected:
 	ReferencedObject();
 	virtual ~ReferencedObject();
 private://unable copy construct
@@ -98,17 +98,21 @@ Reference<CastType> StaticCastPointer(Reference<ObjType> pObj)
 
 inline void ReferencedObject::AddRef()
 {
-	Atomic::AtomicAdd(&m_nRefCount,1);
+	++m_nRefCount;
 }
 
 inline void ReferencedObject::DeRef()
 {
-	Atomic::AtomicAdd(&m_nRefCount,-1);
+	--m_nRefCount;
+	if(m_nRefCount==0)
+	{
+		delete this;
+	}
 }
 
 inline void ReferencedObject::SetRef(int nRef)
 {
-	Atomic::AtomicExchange(&m_nRefCount,nRef);
+	m_nRefCount = nRef;
 }
 
 inline int ReferencedObject::GetRef() const

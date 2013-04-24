@@ -120,10 +120,10 @@ static void FreeImageErrorHandler(FREE_IMAGE_FORMAT fif, const char *message)
 	}
 }
 
-bool RenderDevice::Init(void* hWnd,bool bWindowed )
+bool RenderDevice::Init(void* hWnd,int nWidth,int nHeight,bool bWindowed )
 {
 	CH_ASSERT(m_pEGL==nullptr);
-	m_pEGL = GLEGL::Create(hWnd) ;
+	m_pEGL = GLEGL::Create(hWnd,nWidth,nHeight) ;
 	if(m_pEGL==nullptr)
 	{
 		return false;
@@ -158,7 +158,7 @@ void RenderDevice::SwapBuffer()
 	m_pEGL->SwapBuffers();
 }
 
-IRenderDevice * CreateRenderDevice(void *winID, RenderDriverType::Type eType,bool bWindowed)
+IRenderDevice * CreateRenderDevice(void *winID,int nWidth,int nHeight, RenderDriverType::Type eType,bool bWindowed)
 {
 	RenderDevice *pRenderDevice = nullptr;
 	switch(eType)
@@ -171,7 +171,7 @@ IRenderDevice * CreateRenderDevice(void *winID, RenderDriverType::Type eType,boo
 		return nullptr;
 	}
 
-	if(!pRenderDevice->Init(winID,bWindowed))
+	if(!pRenderDevice->Init(winID,nWidth,nHeight,bWindowed))
 	{
 		CH_SFDEL(pRenderDevice);
 		return nullptr;

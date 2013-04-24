@@ -390,6 +390,6 @@ public:
 };
 
 
-IRenderDevice *CreateRenderDevice(void *winID, RenderDriverType::Type eType,bool bWindowed=true);
+IRenderDevice *CreateRenderDevice(void *winID,int nWidth,int nHeight,RenderDriverType::Type eType,bool bWindowed=true);
 
 NS_CH_END

@@ -1,6 +1,10 @@
 #include "stdafx.h"
+
+#if CH_PLATFORM==CH_PLATFORM_ANDROID
+
 #include "App/android/Application_android.h"
 #include "Platform/android/NativeWindow_android.h"
+
 
 extern int main(int argc, const char* argv[]);
 
@@ -92,7 +96,9 @@ void Application_android::PrintCurrentConfig()
 
 bool Application_android::Create( uint nWidth,uint nHeight )
 {
-
+	m_nWidth = nWidth;
+	m_nHeight = nHeight;
+	return true;
 }
 
 void Application_android::SetOnIdleProc( pfn_OnIdle onIdle,void *pUserParm )
@@ -117,7 +123,6 @@ void Application_android::ProcessSysEvent( void )
 	int8 cmd =AppReadCmd();
 	PreProcessSysCmd(cmd);
 	//调用相应的注册回调
-
 
 	PostProcessSysCmd(cmd);
 }
@@ -411,7 +416,7 @@ void Application_android::AppInit(ANativeActivity* activity,void* savedState, si
 	activity->callbacks->onInputQueueDestroyed = JvmOnInputQueueDestroyed;
 	activity->instance = this;
 	m_pActivity = activity;
-
+	FileSystem::GetInstancePtr()->SetAPIContex(activity->assetManager);
 	int r = pthread_mutex_init(&mutex, NULL);
 	r= pthread_cond_init(&cond, NULL);
 
@@ -485,7 +490,7 @@ void Application_android::OnInputQueueDestroyed( AInputQueue* queue )
 
 IRenderDevice* Application_android::CreateRender(NativeWindow_android* pWnd)
 {
-	IRenderDevice* pDevice = CreateRenderDevice(pWnd,RenderDriverType::OPENGL,true);
+	IRenderDevice* pDevice = CreateRenderDevice(pWnd->GetNativeWindow(),m_nWidth,m_nHeight,RenderDriverType::OPENGL,true);
 	return pDevice;
 }
 
@@ -501,3 +506,5 @@ void ANativeActivity_onCreate(ANativeActivity* activity,void* savedState, size_t
 		pApp->AppInit(activity,savedState,savedStateSize);
 }
 
+
+#endif

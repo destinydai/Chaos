@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="PgSql">
+      <UniqueIdentifier>{dbd778c1-d8f4-4a69-8de8-ef5a15fe24fa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Database\Database.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Database\TableCreator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Include\Database\TableField.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Database\PgSql\PgRecord.h">
+      <Filter>PgSql</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Database\PgSql\PgRecordField.h">
+      <Filter>PgSql</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Database\PgSql\PgRecordSet.h">
+      <Filter>PgSql</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Database\PgSql\PgRecordTable.h">
+      <Filter>PgSql</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Database\PgSql\PgSqlDatabase.h">
+      <Filter>PgSql</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Database\DatabaseDecl.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Database\TableParse.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Database\PgSql\PgRecord.cpp">
+      <Filter>PgSql</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Database\PgSql\PgRecordField.cpp">
+      <Filter>PgSql</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Database\PgSql\PgRecordSet.cpp">
+      <Filter>PgSql</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Database\PgSql\PgRecordTable.cpp">
+      <Filter>PgSql</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Database\PgSql\PgSqlDatabase.cpp">
+      <Filter>PgSql</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Database\Database.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Database\TableCreator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Database\TableField.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Database\TableParse.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

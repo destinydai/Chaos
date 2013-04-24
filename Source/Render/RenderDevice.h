@@ -10,7 +10,7 @@ public:
 	RenderDevice();
 	virtual ~RenderDevice();
 public:
-	bool Init(void* hWnd,bool bWindowed);
+	bool Init(void* hWnd,int nWidth,int nHeight,bool bWindowed);
 
 	virtual void AfterDeviceCreated() {}
 public://interface
